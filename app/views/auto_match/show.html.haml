@@ -1,0 +1,10 @@
+- match_p = present(@match)
+
+- content_for(:title) { safe_join([match_p, @league.name], ' | ') }
+
+%h1 AutoMatch
+%h2= match_p.title
+
+%p By pressing confirm you agree to the match being automatically submitted by the server.
+
+%button.button Dummy Confirm
