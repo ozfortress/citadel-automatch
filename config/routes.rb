@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       namespace :auto_match do
         get 'find', to: '#find'
         post 'register', to: '#register'
+        post 'authorize', to: '#authorize'
         post 'update', to: '#update'
         post 'submit', to: '#submit'
       end
@@ -11,5 +12,5 @@ Rails.application.routes.draw do
   end
 
   get 'matches/:id/auto_match/verify', controller: 'auto_match', action: :show, as: 'auto_match_verify'
-  post 'matches/:id/auto_match/verify', controller: 'auto_match', action: :update
+  post 'matches/:id/auto_match/verify', controller: 'auto_match', action: :verify
 end

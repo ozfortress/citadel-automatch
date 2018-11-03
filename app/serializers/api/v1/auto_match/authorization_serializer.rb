@@ -3,6 +3,8 @@ module API
     module AutoMatch
       class AuthorizationSerializer < ActiveModel::Serializer
         type :authorization
+
+        attributes :match_id, :token
       end
     end
   end

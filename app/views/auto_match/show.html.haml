@@ -5,6 +5,24 @@
 %h1 AutoMatch
 %h2= match_p.title
 
-%p By pressing confirm you agree to the match being automatically submitted by the server.
+- if @authorization
+  %p The server has been authorized to manage the match.
+  %p No further action is required.
 
-%button.button Dummy Confirm
+- elsif !@for_home_team && !@for_away_team
+  %p You are not rostered on either team, and may not confirm the match. Please ask a rostered team member to confirm it.
+
+- elsif @for_home_team && @registration.home_team_confirmed? || @for_away_team && @registration.away_team_confirmed?
+  %script if (close) close(); if (window && window.close) window.close(); window.open('','_self').close();
+
+  %p Thank you for confirming this match.
+  %p No further actions from your team are required.
+
+- else
+  %p By pressing confirm you agree to the match being automatically submitted by the server.
+
+  = form_tag({}, { method: :post }) do
+    = hidden_field_tag 'token', @token
+    = hidden_field_tag 'match_id', @match.id
+
+    %button.btn.btn-success Confirm
